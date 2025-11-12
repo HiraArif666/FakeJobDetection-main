@@ -1,8 +1,15 @@
+from pathlib import Path
 import streamlit as st
 import pickle
 import tensorflow as tf
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 import numpy as np
+
+# Streamlit config should be the first Streamlit call
+st.set_page_config(page_title="Fake Job Post Detector", page_icon="🛰️", layout="centered")
+
+# Resolve paths relative to this script (app/app.py)
+BASE_DIR = Path(__file__).resolve().parent
 
 # =============================
 # LOAD MODELS AND TOKENIZERS
@@ -10,13 +17,16 @@ import numpy as np
 @st.cache_resource
 def load_models():
     # Load TF-IDF model + vectorizer
-    tfidf_vectorizer = pickle.load(open("tfidf_vectorizer.pkl", "rb"))
-    lr_model = pickle.load(open("model_tfidf_lr.pkl", "rb"))
-    
+    with open(BASE_DIR / "tfidf_vectorizer.pkl", "rb") as f:
+        tfidf_vectorizer = pickle.load(f)
+    with open(BASE_DIR / "model_tfidf_lr.pkl", "rb") as f:
+        lr_model = pickle.load(f)
+
     # Load Bi-LSTM model + tokenizer
-    bilstm_model = tf.keras.models.load_model("model_bilstm.h5")
-    tokenizer = pickle.load(open("tokenizer.pkl", "rb"))
-    
+    bilstm_model = tf.keras.models.load_model(BASE_DIR / "model_bilstm.h5", compile=False)
+    with open(BASE_DIR / "tokenizer.pkl", "rb") as f:
+        tokenizer = pickle.load(f)
+
     return tfidf_vectorizer, lr_model, bilstm_model, tokenizer
 
 tfidf_vectorizer, lr_model, bilstm_model, tokenizer = load_models()
@@ -24,7 +34,6 @@ tfidf_vectorizer, lr_model, bilstm_model, tokenizer = load_models()
 # =============================
 # STREAMLIT UI
 # =============================
-st.set_page_config(page_title="Fake Job Post Detector", page_icon="🛰️", layout="centered")
 st.title("🚀 Deep Learning–Based Fake Job Post Detection")
 st.write("Paste a job posting below to check if it's **Real** or **Fake** using AI models.")
 
@@ -38,13 +47,13 @@ if st.button("Predict"):
     else:
         # TF-IDF Prediction
         tfidf_features = tfidf_vectorizer.transform([user_input])
-        lr_pred = lr_model.predict(tfidf_features)[0]
+        lr_pred = int(lr_model.predict(tfidf_features)[0])
 
         # Bi-LSTM Prediction
         seq = tokenizer.texts_to_sequences([user_input])
         pad = pad_sequences(seq, maxlen=200, padding='post')
-        bilstm_pred = bilstm_model.predict(pad)
-        bilstm_pred_label = (bilstm_pred > 0.5).astype(int)[0][0]
+        bilstm_pred = bilstm_model.predict(pad, verbose=0)
+        bilstm_pred_label = int((bilstm_pred > 0.5).astype(int)[0][0])
 
         # Display results
         st.subheader("🧠 Model Predictions")
