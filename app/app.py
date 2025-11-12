@@ -10,12 +10,12 @@ import numpy as np
 @st.cache_resource
 def load_models():
     # Load TF-IDF model + vectorizer
-    tfidf_vectorizer = pickle.load(open("../models/tfidf_vectorizer.pkl", "rb"))
-    lr_model = pickle.load(open("../models/model_tfidf_lr.pkl", "rb"))
+    tfidf_vectorizer = pickle.load(open("tfidf_vectorizer.pkl", "rb"))
+    lr_model = pickle.load(open("model_tfidf_lr.pkl", "rb"))
     
     # Load Bi-LSTM model + tokenizer
-    bilstm_model = tf.keras.models.load_model("../models/model_bilstm.h5")
-    tokenizer = pickle.load(open("../models/tokenizer.pkl", "rb"))
+    bilstm_model = tf.keras.models.load_model("model_bilstm.h5")
+    tokenizer = pickle.load(open("tokenizer.pkl", "rb"))
     
     return tfidf_vectorizer, lr_model, bilstm_model, tokenizer
 
