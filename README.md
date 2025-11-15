@@ -4,7 +4,7 @@ This project includes data preprocessing, modeling, evaluation, deployment, and 
 
 🔗 **Live App**: https://fakejobdetection01.streamlit.app/
 
-📘 **Medium Article:** https://medium.com/p/c04410608b38/edit
+📘 **Medium Article:** [https://medium.com/p/c04410608b38/edit](https://medium.com/@h.arif.kts4/deep-learning-based-fake-job-post-detection-on-social-media-c04410608b38?postPublishedType=initial)
 
 💻 **GitHub Repository:** https://github.com/HiraArif666/FakeJobDetection-main
 
@@ -158,7 +158,7 @@ FakeJobDetection-main/
 # **📚 Medium Article**
 
 Full project explanation with visuals & insights:
-👉 https://medium.com/p/c04410608b38/edit
+👉 [https://medium.com/p/c04410608b38/edit](https://medium.com/@h.arif.kts4/deep-learning-based-fake-job-post-detection-on-social-media-c04410608b38?postPublishedType=initial)
 
 
 
