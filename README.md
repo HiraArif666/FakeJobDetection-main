@@ -9,8 +9,18 @@ This project includes data preprocessing, modeling, evaluation, deployment, and 
 💻 **GitHub Repository:** https://github.com/HiraArif666/FakeJobDetection-main
 
 # **Problem Statement**
-Online job portals (LinkedIn, Indeed, Google Jobs) face an increasing number of fake job postings created to scam users, steal personal information, or promote malicious links.
-Manual moderation is slow and unreliable.
+Online job platforms such as LinkedIn, Indeed, and Google Jobs face a rising number of fraudulent job posts designed to:
+
+Steal personal information
+
+Run scams
+
+Redirect users to malicious websites
+
+Waste job seekers’ time
+
+Manual moderation is slow and inefficient.
+This project aims to build an AI system that automatically classifies job posts as Real or Fake based on textual content.
 
 **Goal**: Build an AI system that can automatically analyze job descriptions and classify them as Real or Fake, improving safety for job seekers and recruitment platforms.
 
